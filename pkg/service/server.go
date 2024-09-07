@@ -101,6 +101,7 @@ func NewLivekitServer(conf *config.Config,
 			// allow preflight to be cached for a day
 			MaxAge: 86400,
 		}),
+		negroni.HandlerFunc(RemoveDoubleSlashes),
 	}
 	if keyProvider != nil {
 		middlewares = append(middlewares, NewAPIKeyAuthMiddleware(keyProvider))
